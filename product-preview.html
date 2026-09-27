@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flipwise — Product UI Preview</title>
+<style>
+  :root{
+    --purple:#6C5CE7; --purple-dark:#5A46D6; --purple-light:#F1EEFE;
+    --ink:#14141F; --muted:#8B8FA3; --line:#EFEFF4; --bg:#FFFFFF;
+    --green-bg:#E3F9E8; --green:#189A57;
+    --orange-bg:#FDF1DC; --orange:#D6870F; --red:#E23744;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#F4F2FB;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);}
+  .page{max-width:1400px;margin:0 auto;padding:48px 24px 96px;}
+  .page-header{text-align:center;margin-bottom:40px;}
+  .page-header h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin:0 0 8px;}
+  .page-header h1 .dot{color:var(--purple);}
+  .page-header p{color:var(--muted);font-size:14px;margin:0;}
+  .grid{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;}
+  .phone-block{display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .phone-label{font-size:13px;font-weight:700;color:var(--ink);}
+  .phone{width:390px;height:844px;border-radius:40px;overflow:hidden;background:#fff;box-shadow:0 24px 60px rgba(20,20,31,0.18);border:8px solid #14141F;}
+  .screen{width:100%;height:100%;display:flex;flex-direction:column;background:#fff;overflow:hidden;}
+  .navitem{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:var(--muted);font-weight:500;}
+  .navitem.active{color:var(--purple);}
+  .infrow{display:flex;align-items:center;gap:10px;padding:11px 0;}
+  .infrow + .infrow{border-top:1px solid var(--line);}
+  label{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:6px;display:block;}
+  .field{border:1.4px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink);display:flex;align-items:center;justify-content:space-between;}
+  .ph{color:#AAAAB8;font-weight:400;}
+  .tl{display:flex;gap:12px;position:relative;padding-bottom:18px;}
+  .tl:last-child{padding-bottom:0;}
+  .tl::before{content:"";position:absolute;left:16px;top:34px;bottom:0;width:1.4px;background:var(--line);}
+  .tl:last-child::before{display:none;}
+  .dot{width:34px;height:34px;border-radius:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:56px;}
+  footer a{color:var(--purple);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-header">
+    <h1>flipwise<span class="dot">.</span> — product UI preview</h1>
+    <p>Static export of the six core screens. Backed by a real Supabase schema — see <code>supabase/migrations/</code> and <code>App.tsx</code> in this repo.</p>
+  </div>
+  <div class="grid">
+
+    <div class="phone-block">
+      <div class="phone-label">Home</div>
+      <div class="phone"><div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;flex-shrink:0;">
+          <span style="font-size:15px;font-weight:600;letter-spacing:-0.2px;">9:41</span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#14141F"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#14141F"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#14141F"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#14141F"/></svg>
+            <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#14141F"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#14141F" opacity="0.4" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#14141F"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#14141F" opacity="0.4"/></svg>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:8px 20px 20px;display:flex;flex-direction:column;gap:22px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:21px;font-weight:800;letter-spacing:-0.5px;color:var(--ink);">flipwise<span style="color:var(--purple);">.</span></div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="position:relative;width:36px;height:36px;border-radius:18px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14141F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+                <div style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:4px;background:#E23744;border:1.5px solid #fff;"></div>
+              </div>
+              <div style="width:36px;height:36px;border-radius:18px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">S</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">Good morning, Salik</div>
+            <div style="font-size:13.5px;color:var(--muted);margin-top:2px;">Here's your flipping overview for today.</div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:20px;padding:20px;color:#fff;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;opacity:0.9;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+                Net Profit
+              </div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:12px;background:rgba(255,255,255,0.18);padding:5px 10px;border-radius:20px;font-weight:600;">
+                This Month
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+            </div>
+            <div style="font-size:34px;font-weight:800;margin-top:14px;letter-spacing:-0.5px;">Rs 17,300</div>
+            <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.18);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;margin-top:12px;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M6 15l6-6 6 6"/></svg>
+              +12% vs last month
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:14px 10px;">
+              <div style="width:34px;height:34px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              </div>
+              <div style="font-size:19px;font-weight:800;margin-top:10px;">12</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:1px;">Total Devices</div>
+            </div>
+            <div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:14px 10px;">
+              <div style="width:34px;height:34px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8-9-9V4h7l10 10z"/><circle cx="8" cy="8" r="1.3" fill="var(--purple)" stroke="none"/></svg>
+              </div>
+              <div style="font-size:19px;font-weight:800;margin-top:10px;">8</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:1px;">Ready for Sale</div>
+            </div>
+            <div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:14px 10px;">
+              <div style="width:34px;height:34px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              </div>
+              <div style="font-size:19px;font-weight:800;margin-top:10px;">3</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:1px;">In Repair</div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div style="font-size:16px;font-weight:700;">Quick Actions</div>
+              <div style="font-size:12.5px;color:var(--purple);font-weight:600;">View All</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                <div style="width:52px;height:52px;border-radius:16px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                </div>
+                <div style="font-size:10.5px;font-weight:600;text-align:center;">Add Device</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                <div style="width:52px;height:52px;border-radius:16px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+                </div>
+                <div style="font-size:10.5px;font-weight:600;text-align:center;">Log Repair</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                <div style="width:52px;height:52px;border-radius:16px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8-9-9V4h7l10 10z"/><circle cx="8" cy="8" r="1.3" fill="var(--purple)" stroke="none"/></svg>
+                </div>
+                <div style="font-size:10.5px;font-weight:600;text-align:center;">Record Sale</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                <div style="width:52px;height:52px;border-radius:16px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+                </div>
+                <div style="font-size:10.5px;font-weight:600;text-align:center;">View Reports</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div style="font-size:16px;font-weight:700;">Recent Devices</div>
+              <div style="font-size:12.5px;color:var(--purple);font-weight:600;">View All</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:10px;">
+                <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#4B3E9E,#2A2560);flex-shrink:0;"></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13.5px;font-weight:700;">iPhone 14 Pro</div>
+                  <div style="font-size:11.5px;color:var(--muted);">256GB &middot; Deep Purple</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+                  <div style="font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:20px;">Ready for sale</div>
+                  <div style="font-size:13px;font-weight:700;">Rs 265,000</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:10px;">
+                <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#3A3A3E,#141416);flex-shrink:0;"></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13.5px;font-weight:700;">Google Pixel 8</div>
+                  <div style="font-size:11.5px;color:var(--muted);">128GB &middot; Obsidian</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+                  <div style="font-size:10.5px;font-weight:700;color:var(--orange);background:var(--orange-bg);padding:3px 8px;border-radius:20px;">In repair</div>
+                  <div style="font-size:13px;font-weight:700;">Rs 118,000</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:10px;">
+                <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#E7DFC9,#C7B98F);flex-shrink:0;"></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13.5px;font-weight:700;">iPhone 13</div>
+                  <div style="font-size:11.5px;color:var(--muted);">128GB &middot; Starlight</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+                  <div style="font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:20px;">Ready for sale</div>
+                  <div style="font-size:13px;font-weight:700;">Rs 175,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-around;height:82px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;position:relative;padding-top:10px;">
+          <div class="navitem active"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Inventory</div>
+          <div style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(108,92,231,0.4);position:absolute;left:50%;top:-24px;transform:translateX(-50%);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div style="width:44px;"></div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-14 3 8h5"/></svg>Activity</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>More</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Inventory</div>
+      <div class="phone"><div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;flex-shrink:0;">
+          <span style="font-size:15px;font-weight:600;letter-spacing:-0.2px;">9:41</span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#14141F"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#14141F"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#14141F"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#14141F"/></svg>
+            <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#14141F"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#14141F" opacity="0.4" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#14141F"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#14141F" opacity="0.4"/></svg>
+          </div>
+        </div>
+        <div style="padding:6px 20px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+          <div style="font-size:23px;font-weight:800;letter-spacing:-0.4px;">Inventory</div>
+          <div style="display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));padding:9px 14px;border-radius:12px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            <span style="color:#fff;font-size:12.5px;font-weight:700;">Add Device</span>
+          </div>
+        </div>
+        <div style="padding:0 20px 12px;display:flex;gap:8px;flex-shrink:0;">
+          <div style="flex:1;display:flex;align-items:center;gap:8px;background:#F5F5F8;border-radius:12px;padding:10px 12px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <span style="font-size:12.5px;color:var(--muted);">Search by device, model or IMEI...</span>
+          </div>
+          <div style="width:38px;height:38px;background:#F5F5F8;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          </div>
+        </div>
+        <div style="padding:0 20px 14px;display:flex;gap:8px;flex-shrink:0;">
+          <div style="background:var(--purple);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;">All (12)</div>
+          <div style="background:#F5F5F8;color:var(--ink);font-size:12px;font-weight:600;padding:7px 14px;border-radius:20px;">Ready (8)</div>
+          <div style="background:#F5F5F8;color:var(--ink);font-size:12px;font-weight:600;padding:7px 14px;border-radius:20px;">In Repair (3)</div>
+          <div style="background:#F5F5F8;color:var(--ink);font-size:12px;font-weight:600;padding:7px 14px;border-radius:20px;">Sold (11)</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:0 20px 16px;display:flex;flex-direction:column;gap:12px;">
+          <div style="border:1px solid var(--line);border-radius:16px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#4B3E9E,#2A2560);flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:14px;font-weight:700;">iPhone 14 Pro</div>
+                <div style="font-size:11.5px;color:var(--muted);">256GB &middot; Deep Purple</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:20px;">Ready for sale</div>
+                <div style="font-size:14px;font-weight:700;">Rs 265,000</div>
+              </div>
+            </div>
+            <div style="height:1px;background:var(--line);margin:10px 0;"></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+              <div style="width:18px;height:18px;border-radius:9px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">A</div>
+              <span>Apple</span>
+              <div style="margin-left:auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg>
+              IMEI: 356789123456789
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600;margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+              PTA Approved
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              No repairs
+            </div>
+          </div>
+          <div style="border:1px solid var(--line);border-radius:16px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#3A3A3E,#141416);flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:14px;font-weight:700;">Google Pixel 8</div>
+                <div style="font-size:11.5px;color:var(--muted);">128GB &middot; Obsidian</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--orange);background:var(--orange-bg);padding:3px 8px;border-radius:20px;">In repair</div>
+                <div style="font-size:14px;font-weight:700;">Rs 118,000</div>
+              </div>
+            </div>
+            <div style="height:1px;background:var(--line);margin:10px 0;"></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+              <div style="width:18px;height:18px;border-radius:9px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">G</div>
+              <span>Google</span>
+              <div style="margin-left:auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg>
+              IMEI: 357912345678901
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--red);font-weight:600;margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+              PTA Non-Approved
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              Screen replacement
+            </div>
+          </div>
+          <div style="border:1px solid var(--line);border-radius:16px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(160deg,#E7DFC9,#C7B98F);flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:14px;font-weight:700;">iPhone 13</div>
+                <div style="font-size:11.5px;color:var(--muted);">128GB &middot; Starlight</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:20px;">Ready for sale</div>
+                <div style="font-size:14px;font-weight:700;">Rs 175,000</div>
+              </div>
+            </div>
+            <div style="height:1px;background:var(--line);margin:10px 0;"></div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+              <div style="width:18px;height:18px;border-radius:9px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">A</div>
+              <span>Apple</span>
+              <div style="margin-left:auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg>
+              IMEI: 358901234567892
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600;margin-top:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+              PTA Approved
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-around;height:82px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;position:relative;padding-top:10px;">
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</div>
+          <div class="navitem active"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Inventory</div>
+          <div style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(108,92,231,0.4);position:absolute;left:50%;top:-24px;transform:translateX(-50%);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div style="width:44px;"></div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-14 3 8h5"/></svg>Activity</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>More</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Device Details</div>
+      <div class="phone"><div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;flex-shrink:0;">
+          <span style="font-size:15px;font-weight:600;letter-spacing:-0.2px;">9:41</span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#14141F"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#14141F"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#14141F"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#14141F"/></svg>
+            <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#14141F" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#14141F"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#14141F" opacity="0.4" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#14141F"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#14141F" opacity="0.4"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px;flex-shrink:0;">
+          <div style="width:34px;height:34px;border-radius:17px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </div>
+          <div style="font-size:16px;font-weight:700;">Device Details</div>
+          <div style="width:34px;height:34px;border-radius:17px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="1.6" fill="var(--ink)"/><circle cx="12" cy="12" r="1.6" fill="var(--ink)"/><circle cx="12" cy="19" r="1.6" fill="var(--ink)"/></svg>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:8px 20px 20px;display:flex;flex-direction:column;gap:18px;">
+          <div style="display:flex;gap:14px;align-items:center;">
+            <div style="width:82px;height:82px;border-radius:18px;background:linear-gradient(160deg,#5B4DBD,#241F52);flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:18px;font-weight:800;">iPhone 14 Pro</div>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:2px;">256GB &middot; Deep Purple</div>
+              <div style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--green);background:var(--green-bg);padding:4px 10px;border-radius:20px;margin-top:8px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l3 3 5-6"/></svg>
+                Ready for sale
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:#F8F8FB;border-radius:14px;padding:12px 14px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 2v4M17 2v4"/></svg>
+              <div>
+                <div style="font-size:10.5px;color:var(--muted);">Device ID</div>
+                <div style="font-size:12.5px;font-weight:700;">FW-IPH14P-001</div>
+              </div>
+            </div>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          </div>
+          <div style="display:flex;gap:22px;border-bottom:1px solid var(--line);flex-shrink:0;">
+            <div style="font-size:13px;font-weight:700;color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:10px;">Overview</div>
+            <div style="font-size:13px;font-weight:600;color:var(--muted);padding-bottom:10px;">Repairs (0)</div>
+            <div style="font-size:13px;font-weight:600;color:var(--muted);padding-bottom:10px;">Sales History (1)</div>
+          </div>
+          <div>
+            <div style="font-size:14.5px;font-weight:700;margin-bottom:4px;">Device Information</div>
+            <div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">IMEI Number</span><span style="font-size:13px;font-weight:600;">356789123456789</span></div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">PTA Status</span><span style="font-size:13px;font-weight:700;color:var(--green);">Approved</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Storage</span><span style="font-size:13px;font-weight:600;">256GB</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Color</span><span style="font-size:13px;font-weight:600;">Deep Purple</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Model</span><span style="font-size:13px;font-weight:600;">iPhone 14 Pro</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Brand</span><span style="font-size:13px;font-weight:600;">Apple</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <div style="font-size:14.5px;font-weight:700;">Cost Breakdown</div>
+              <div style="font-size:12.5px;font-weight:700;color:var(--purple);">Edit</div>
+            </div>
+            <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h3l2.3 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H5.5"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Purchase Price</span><span style="font-size:13px;font-weight:600;">Rs 240,000</span></div>
+            <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Repair Cost</span><span style="font-size:13px;font-weight:600;">Rs 7,700</span></div>
+            <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Total Cost</span><span style="font-size:13px;font-weight:700;">Rs 247,700</span></div>
+            <div style="height:1px;background:var(--line);margin:8px 0;"></div>
+            <div class="infrow" style="border-top:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Expected Selling Price</span><span style="font-size:13px;font-weight:700;">Rs 265,000</span></div>
+            <div class="infrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg><span style="font-size:13px;color:var(--muted);flex:1;">Expected Profit</span><span style="font-size:13.5px;font-weight:800;color:var(--green);">Rs 17,300</span></div>
+          </div>
+          <div style="display:flex;gap:10px;padding-top:2px;">
+            <div style="flex:1;border:1.6px solid var(--purple);color:var(--purple);font-size:13px;font-weight:700;text-align:center;padding:12px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              Log repair
+            </div>
+            <div style="flex:1;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;font-size:13px;font-weight:700;text-align:center;padding:12px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8-9-9V4h7l10 10z"/><circle cx="8" cy="8" r="1.3" fill="#fff" stroke="none"/></svg>
+              Record sale
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Add a Phone</div>
+      <div class="phone"><div class="screen">
+        <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));flex-shrink:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;">
+            <span style="font-size:15px;font-weight:600;color:#fff;">9:41</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#fff"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#fff"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#fff"/></svg>
+              <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#fff"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#fff" opacity="0.5" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#fff"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#fff" opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 18px;">
+            <div style="font-size:18px;font-weight:800;color:#fff;">Flipwise</div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;background:#fff;border-radius:22px 22px 0 0;margin-top:-14px;padding:22px 20px 20px;display:flex;flex-direction:column;gap:18px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;border-radius:14px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </div>
+            <div>
+              <div style="font-size:16.5px;font-weight:800;">Add a phone</div>
+              <div style="font-size:12px;color:var(--muted);">Add device details to your inventory</div>
+            </div>
+          </div>
+          <div><label>Device model</label><div class="field"><span class="ph">Select device model</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div>
+          <div><label>Storage</label><div class="field"><span class="ph">Select storage</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div>
+          <div><label>IMEI 1</label><div class="field"><span class="ph">Enter IMEI 1 (15 digits)</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"><path d="M4 4v16M8 4v16M11 4v16M15 4v16M18 4v16M21 4v16"/></svg></div></div>
+          <div><label>IMEI 2 <span style="color:var(--muted);font-weight:500;">(optional)</span></label><div class="field"><span class="ph">Enter IMEI 2 (15 digits)</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"><path d="M4 4v16M8 4v16M11 4v16M15 4v16M18 4v16M21 4v16"/></svg></div></div>
+          <div>
+            <label>PTA status</label>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;border:1.6px solid var(--purple);color:var(--purple);border-radius:12px;padding:10px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4 10-10"/></svg>Approved</div>
+              <div style="flex:1;border:1.4px solid var(--line);color:var(--ink);border-radius:12px;padding:10px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E23744" stroke-width="2.5" stroke-linecap="round"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4"/><circle cx="12" cy="17.5" r="0.6" fill="#E23744" stroke="none"/></svg>Non-PTA</div>
+              <div style="flex:1;border:1.4px solid var(--line);color:var(--ink);border-radius:12px;padding:10px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 1.7-2 3.5"/><circle cx="12" cy="17" r="0.6" fill="var(--muted)" stroke="none"/></svg>Unknown</div>
+            </div>
+          </div>
+          <div><label>Purchase price (PKR)</label><div class="field"><span class="ph">Enter purchase price</span><span style="color:var(--muted);font-weight:700;font-size:11.5px;">PKR</span></div></div>
+          <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;font-size:14px;font-weight:700;text-align:center;padding:14px;border-radius:14px;margin-top:2px;">Add to inventory</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-around;height:82px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;position:relative;padding-top:10px;">
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Inventory</div>
+          <div style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(108,92,231,0.4);position:absolute;left:50%;top:-24px;transform:translateX(-50%);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div style="width:44px;"></div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-14 3 8h5"/></svg>Activity</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>More</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Repairs</div>
+      <div class="phone"><div class="screen">
+        <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));flex-shrink:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;">
+            <span style="font-size:15px;font-weight:600;color:#fff;">9:41</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#fff"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#fff"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#fff"/></svg>
+              <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#fff"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#fff" opacity="0.5" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#fff"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#fff" opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 16px 18px;">
+            <div style="width:32px;height:32px;border-radius:16px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+            <div style="font-size:17px;font-weight:800;color:#fff;">Repairs</div>
+            <div style="width:32px;height:32px;border-radius:16px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="1.6" fill="#fff"/><circle cx="12" cy="12" r="1.6" fill="#fff"/><circle cx="12" cy="19" r="1.6" fill="#fff"/></svg></div>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;background:#fff;border-radius:22px 22px 0 0;margin-top:-14px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:16px;">
+          <div style="border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;gap:14px;">
+            <div style="width:70px;height:70px;border-radius:14px;background:linear-gradient(160deg,#3A3A3E,#141416);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-size:15px;font-weight:800;">Google Pixel 8</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">128 GB &middot; Obsidian</div>
+              <div style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:var(--orange);background:var(--orange-bg);padding:3px 9px;border-radius:20px;margin-top:8px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>In repair</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:8px;">IMEI 1<br><span style="color:var(--ink);font-weight:600;">356774620012345</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-top:6px;">IMEI 2<br><span style="color:var(--ink);font-weight:600;">356774620012346</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <div style="font-size:15px;font-weight:800;">Diagnostics</div>
+              <div style="font-size:12.5px;font-weight:700;color:var(--purple);">Edit</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px;">
+                <div style="width:36px;height:36px;border-radius:10px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+                <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Screen</div><div style="font-size:11px;color:var(--muted);">Cracked, needs replacement</div></div>
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px;">
+                <div style="width:36px;height:36px;border-radius:10px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M10 6h4"/></svg></div>
+                <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Battery</div><div style="font-size:11px;color:var(--muted);">Health below 80%</div></div>
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px;">
+                <div style="width:36px;height:36px;border-radius:10px;background:#F5F5F8;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 1 6 6c0 4-2 5-2 9"/><path d="M12 7a4 4 0 0 0-4 4c0 4 1.5 6 1.5 8"/><path d="M12 11a2 2 0 0 1 2 2c0 3-1 4-1 6"/><path d="M8 15c0 2 0.5 3 0.5 4"/></svg></div>
+                <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Fingerprint</div><div style="font-size:11px;color:var(--muted);">Not working</div></div>
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+              </div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--line);border-radius:16px;padding:14px;">
+            <div style="font-size:14.5px;font-weight:800;margin-bottom:10px;">Repair costs</div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;color:var(--ink);"><span>Screen replacement</span><span style="font-weight:600;">PKR 18,000</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;color:var(--ink);"><span>Battery replacement</span><span style="font-weight:600;">PKR 6,500</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;color:var(--ink);"><span>Fingerprint repair</span><span style="font-weight:600;">PKR 4,000</span></div>
+            <div style="height:1px;background:var(--line);margin:8px 0;"></div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:800;"><span>Total (PKR)</span><span>PKR 28,500</span></div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;font-size:14px;font-weight:700;text-align:center;padding:14px;border-radius:14px;">Log repair</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-around;height:82px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;position:relative;padding-top:10px;">
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Inventory</div>
+          <div style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(108,92,231,0.4);position:absolute;left:50%;top:-24px;transform:translateX(-50%);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div style="width:44px;"></div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-14 3 8h5"/></svg>Activity</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>More</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Activity</div>
+      <div class="phone"><div class="screen">
+        <div style="background:linear-gradient(135deg,var(--purple),var(--purple-dark));flex-shrink:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 24px;">
+            <span style="font-size:15px;font-weight:600;color:#fff;">9:41</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#fff"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#fff"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#fff"/></svg>
+              <svg width="15" height="12" viewBox="0 0 16 12" fill="none"><path d="M3 5.3C4.5 3.6 6.2 2.7 8 2.7C9.8 2.7 11.5 3.6 13 5.3" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><path d="M5.6 7.8C6.3 7 7.1 6.6 8 6.6C8.9 6.6 9.7 7 10.4 7.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="#fff"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="#fff" opacity="0.5" fill="none"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#fff"/><rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="#fff" opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 18px;">
+            <div style="font-size:18px;font-weight:800;color:#fff;">Flipwise</div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;background:#fff;border-radius:22px 22px 0 0;margin-top:-14px;padding:22px 20px 20px;display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:22px;font-weight:800;">Activity</div>
+          <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">A timeline of your recent activity</div>
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;padding:10px 0 8px;">Today</div>
+          <div class="tl">
+            <div class="dot" style="background:var(--green-bg);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h3l2.3 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H5.5"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">4:20 PM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Purchased</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">iPhone 13 &middot; 128 GB</div><div style="font-size:12px;font-weight:700;margin-top:1px;">PKR 85,000</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-top:8px;"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="tl">
+            <div class="dot" style="background:#F1EEFE;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">11:15 AM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Repair updated</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Google Pixel 8</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Marked as in repair</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-top:8px;"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="tl">
+            <div class="dot" style="background:#EFF3FE;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B6BE0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="13" height="9"/><path d="M14 10h4l3 3v3h-7"/><circle cx="5.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">9:32 AM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Courier expense</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Leopards Courier</div><div style="font-size:12px;font-weight:700;margin-top:1px;">PKR 1,200</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-top:8px;"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;padding:10px 0 8px;">Yesterday</div>
+          <div class="tl">
+            <div class="dot" style="background:var(--green-bg);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">6:10 PM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Sold</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Samsung Galaxy S22 &middot; 256 GB</div><div style="font-size:12px;font-weight:700;margin-top:1px;">PKR 115,000</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-top:8px;"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div class="tl">
+            <div class="dot" style="background:#F1EEFE;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">2:45 PM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Repair completed</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">iPhone 11</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Replaced battery</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-top:8px;"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;padding:10px 0 8px;">Mar 14, 2025</div>
+          <div class="tl">
+            <div class="dot" style="background:var(--green-bg);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h3l2.3 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H5.5"/></svg></div>
+            <div style="flex:1;padding-top:2px;"><div style="font-size:11px;color:var(--muted);">1:20 PM</div><div style="font-size:13.5px;font-weight:700;margin-top:2px;">Purchased</div><div style="font-size:12px;color:var(--muted);margin-top:1px;">Google Pixel 7 &middot; 128 GB</div><div style="font-size:12px;font-weight:700;margin-top:1px;">PKR 73,000</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-around;height:82px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;position:relative;padding-top:10px;">
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Inventory</div>
+          <div style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(108,92,231,0.4);position:absolute;left:50%;top:-24px;transform:translateX(-50%);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div style="width:44px;"></div>
+          <div class="navitem active"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-14 3 8h5"/></svg>Activity</div>
+          <div class="navitem"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>More</div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+  <footer>Flipwise — generated for this repository. See <a href="README.md">README.md</a> for the Supabase-backed build.</footer>
+</div>
+</body>
+</html>
