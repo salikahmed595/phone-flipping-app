@@ -43,33 +43,67 @@ function Section({ title, action, onPress }: { title: string; action?: string; o
 function Stat({ icon, label, value, sub, tone = 'purple' }: { icon: Icon; label: string; value: string; sub?: string; tone?: 'purple' | 'orange' | 'green' }) { const c = tone === 'green' ? '#22956A' : tone === 'orange' ? '#D48431' : purple; return <View style={styles.stat}><View style={[styles.statIcon, { backgroundColor: c + '13' }]}><I name={icon} size={19} color={c} /></View><Text style={styles.statLabel}>{label}</Text><Text numberOfLines={1} adjustsFontSizeToFit style={styles.statValue}>{value}</Text>{sub && <Text style={styles.statSub}>{sub}</Text>}</View>; }
 function DeviceCard({ device, onPress }: { device: Device; onPress: () => void }) { const [bg, color] = statusColors[device.status]; return <Pressable onPress={onPress} style={styles.deviceCard}><View style={[styles.phoneArt, { backgroundColor: device.tint }]}><View style={styles.phoneShape}><View style={styles.lensRow}><View style={styles.lens}/><View style={styles.lens}/></View></View></View><View style={{ flex: 1, gap: 5 }}><Text style={styles.deviceName}>{device.model}</Text><Text style={styles.meta}>{device.storage}  ·  {device.pta}</Text><View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}><Pill text={device.status} bg={bg} color={color}/><Text style={styles.deviceId}>{device.id}</Text></View></View><I name="chevron-forward" size={17} color="#B6B2C3" /></Pressable>; }
 function Field({ label, value, onChangeText, placeholder, keyboardType, secureTextEntry, autoCapitalize }: { label: string; value: string; onChangeText: (v: string) => void; placeholder?: string; keyboardType?: 'numeric' | 'default' | 'email-address'; secureTextEntry?: boolean; autoCapitalize?: 'none' | 'sentences' }) { return <View style={{ marginBottom: 17 }}><Text style={styles.fieldLabel}>{label}</Text><TextInput accessibilityLabel={label} style={styles.input} value={value} onChangeText={onChangeText} placeholder={placeholder} placeholderTextColor="#B5B1C1" keyboardType={keyboardType || 'default'} secureTextEntry={secureTextEntry} autoCapitalize={autoCapitalize || 'sentences'} /></View>; }
+function authErrorMessage(raw: string): string {
+  const msg = raw.toLowerCase();
+  if (msg.includes('invalid login credentials')) return "That email or password doesn't match our records. Check for typos, or create an account if you're new here.";
+  if (msg.includes('already registered') || msg.includes('already exists')) return 'An account with that email already exists — try signing in instead.';
+  if (msg.includes('password') && (msg.includes('6 character') || msg.includes('short'))) return 'Your password needs to be at least 6 characters.';
+  if (msg.includes('unable to validate email') || msg.includes('invalid email') || msg.includes('invalid format')) return "That doesn't look like a valid email address.";
+  if (msg.includes('email not confirmed')) return 'Confirm your email first — check your inbox for the link we sent, then come back and sign in.';
+  if (msg.includes('rate limit') || msg.includes('too many')) return "You've tried a few too many times — wait a minute and try again.";
+  if (msg.includes('network') || msg.includes('fetch')) return "Couldn't reach the server. Check your internet connection and try again.";
+  return raw;
+}
 function SignIn() {
   const [mode, setMode] = useState<'in' | 'up'>('in');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const switchMode = (next: 'in' | 'up') => { setMode(next); setError(null); setNotice(null); };
   const submit = async () => {
-    if (!email.trim() || password.length < 6) { Alert.alert('Check your details', 'Enter an email and a password of at least 6 characters.'); return; }
-    if (mode === 'up' && !fullName.trim()) { Alert.alert('Check your details', 'Enter your full name.'); return; }
+    setError(null);
+    setNotice(null);
+    const cleanEmail = email.trim();
+    if (!cleanEmail) { setError('Enter your email address.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) { setError("That doesn't look like a valid email address."); return; }
+    if (password.length < 6) { setError('Your password needs to be at least 6 characters.'); return; }
     setBusy(true);
     try {
       if (mode === 'in') {
-        await apiSignIn(email.trim(), password);
+        await apiSignIn(cleanEmail, password);
       } else {
-        const session = await apiSignUp(email.trim(), password, fullName.trim());
+        const session = await apiSignUp(cleanEmail, password, fullName.trim());
         if (!session) {
-          Alert.alert('Check your email', `We sent a confirmation link to ${email.trim()}. Confirm it, then sign in below.`);
+          setNotice(`Almost done — we sent a confirmation link to ${cleanEmail}. Open it, then sign in below.`);
           setMode('in');
         }
       }
     } catch (err: any) {
-      Alert.alert(mode === 'in' ? 'Could not sign in' : 'Could not create account', err?.message ?? String(err));
+      setError(authErrorMessage(err?.message ?? String(err)));
     } finally {
       setBusy(false);
     }
   };
-  return <SafeAreaView style={{ flex: 1, backgroundColor: '#FBFAFE' }}><View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 28 }}><View style={{ alignItems: 'center', marginBottom: 34 }}><View style={[styles.brandIcon, { width: 52, height: 52, borderRadius: 16, marginBottom: 14 }]}><I name="swap-horizontal" size={26} color="#fff" /></View><Text style={[styles.brandName, { fontSize: 26 }]}>flipwise<Text style={{ color: purple }}>.</Text></Text><Text style={[styles.subtitle, { textAlign: 'center', marginTop: 8 }]}>{mode === 'in' ? 'Sign in to your workspace' : 'Create your workspace · the first account becomes the owner'}</Text></View>{mode === 'up' && <Field label="Full name" value={fullName} onChangeText={setFullName} placeholder="e.g. Salik Ahmed" />}<Field label="Email" value={email} onChangeText={setEmail} placeholder="you@business.com" keyboardType="email-address" autoCapitalize="none" /><Field label="Password" value={password} onChangeText={setPassword} placeholder="At least 6 characters" secureTextEntry /><Button title={busy ? 'Please wait…' : mode === 'in' ? 'Sign in' : 'Create account'} onPress={submit} /><Pressable onPress={() => setMode(mode === 'in' ? 'up' : 'in')} style={{ marginTop: 18, alignItems: 'center' }}><Text style={styles.link}>{mode === 'in' ? 'New workspace? Create an account' : 'Already have an account? Sign in'}</Text></Pressable></View></SafeAreaView>;
+  return <SafeAreaView style={{ flex: 1, backgroundColor: '#FBFAFE' }}><View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 28 }}><View style={{ alignItems: 'center', marginBottom: 34 }}><View style={[styles.brandIcon, { width: 52, height: 52, borderRadius: 16, marginBottom: 14 }]}><I name="swap-horizontal" size={26} color="#fff" /></View><Text style={[styles.brandName, { fontSize: 26 }]}>flipwise<Text style={{ color: purple }}>.</Text></Text><Text style={[styles.subtitle, { textAlign: 'center', marginTop: 8 }]}>{mode === 'in' ? 'Sign in to your workspace' : 'Create your workspace in a few seconds'}</Text></View>
+  {notice && <View style={{ flexDirection: 'row', gap: 8, backgroundColor: '#F0EBFC', borderRadius: 10, padding: 12, marginBottom: 16, alignItems: 'flex-start' }}><I name="mail-outline" size={16} color={purple} /><Text style={{ color: '#4C339E', fontSize: 12, lineHeight: 17, flex: 1 }}>{notice}</Text></View>}
+  {error && <View style={{ flexDirection: 'row', gap: 8, backgroundColor: '#FDECEA', borderRadius: 10, padding: 12, marginBottom: 16, alignItems: 'flex-start' }}><I name="alert-circle-outline" size={16} color="#B3261E" /><Text style={{ color: '#B3261E', fontSize: 12, lineHeight: 17, flex: 1 }}>{error}</Text></View>}
+  {mode === 'up' && <Field label="Full name (optional)" value={fullName} onChangeText={setFullName} placeholder="e.g. Salik Ahmed" />}
+  <Field label="Email" value={email} onChangeText={setEmail} placeholder="you@business.com" keyboardType="email-address" autoCapitalize="none" />
+  <View style={{ marginBottom: 17 }}>
+    <Text style={styles.fieldLabel}>Password</Text>
+    <View style={{ justifyContent: 'center' }}>
+      <TextInput accessibilityLabel="Password" style={[styles.input, { paddingRight: 44 }]} value={password} onChangeText={setPassword} placeholder="At least 6 characters" placeholderTextColor="#B5B1C1" secureTextEntry={!showPassword} autoCapitalize="none" />
+      <Pressable onPress={() => setShowPassword(s => !s)} accessibilityLabel={showPassword ? 'Hide password' : 'Show password'} accessibilityRole="button" style={{ position: 'absolute', right: 4, top: 0, height: 45, width: 40, alignItems: 'center', justifyContent: 'center' }}>
+        <I name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={19} color={muted} />
+      </Pressable>
+    </View>
+  </View>
+  <Button title={busy ? 'Please wait…' : mode === 'in' ? 'Sign in' : 'Create account'} onPress={submit} />
+  <Pressable onPress={() => switchMode(mode === 'in' ? 'up' : 'in')} style={{ marginTop: 18, alignItems: 'center' }}><Text style={styles.link}>{mode === 'in' ? 'New here? Create a workspace' : 'Already have an account? Sign in'}</Text></Pressable></View></SafeAreaView>;
 }
 function Empty({ icon, title, subtitle }: { icon: Icon; title: string; subtitle: string }) { return <View style={styles.empty}><View style={styles.emptyIcon}><I name={icon} size={25} color={purple}/></View><Text style={styles.emptyTitle}>{title}</Text><Text style={styles.emptyText}>{subtitle}</Text></View>; }
 function AppContent({ profile, onSignOut }: { profile: Profile; onSignOut: () => void }) {
