@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { DashboardStats, Device, Expense, Part, Profile, SaleRecord, TradeInResult, VerificationCheck } from './types';
+import type { ActiveWarranty, DashboardStats, Device, DeviceHistoryEntry, DiagnosticResult, Expense, Part, Profile, SaleRecord, TradeInResult, VerificationCheck } from './types';
 
 // ---------------------------------------------------------------------------
 // auth
@@ -28,11 +28,39 @@ export async function signOut() {
 export async function fetchProfile(userId: string): Promise<Profile> {
   const { data, error } = await supabase
     .from('profiles')
-    .select('id, full_name, role')
+    .select('id, full_name, role, avatar_url')
     .eq('id', userId)
     .single();
   if (error) throw error;
-  return { id: data.id, fullName: data.full_name, role: data.role };
+  return { id: data.id, fullName: data.full_name, role: data.role, avatarUrl: data.avatar_url };
+}
+
+export async function updateFullName(userId: string, fullName: string): Promise<void> {
+  const { error } = await supabase.from('profiles').update({ full_name: fullName }).eq('id', userId);
+  if (error) throw error;
+}
+
+export async function changePassword(newPassword: string): Promise<void> {
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) throw error;
+}
+
+// Uploads a profile picture to the public "avatars" bucket at
+// <userId>/avatar.<ext>, then points the profile row at its public URL.
+export async function uploadAvatar(userId: string, fileUri: string, contentType: string): Promise<string> {
+  const ext = contentType.includes('png') ? 'png' : 'jpg';
+  const path = `${userId}/avatar.${ext}`;
+  const response = await fetch(fileUri);
+  const arrayBuffer = await response.arrayBuffer();
+  const { error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(path, arrayBuffer, { contentType, upsert: true });
+  if (uploadError) throw uploadError;
+  const { data } = supabase.storage.from('avatars').getPublicUrl(path);
+  const publicUrl = `${data.publicUrl}?t=${Date.now()}`;
+  const { error: updateError } = await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', userId);
+  if (updateError) throw updateError;
+  return publicUrl;
 }
 
 // ---------------------------------------------------------------------------
@@ -95,6 +123,9 @@ export async function addDevice(input: {
   imei2?: string;
   pta: string;
   purchasePrice: number;
+  softwareStatus?: string;
+  conditionNotes?: string;
+  ptaTax?: number;
 }): Promise<Device> {
   const { data, error } = await supabase
     .from('devices')
@@ -105,6 +136,9 @@ export async function addDevice(input: {
       imei2: input.imei2 || null,
       pta_status: input.pta,
       purchase_price: input.purchasePrice,
+      software_status: input.softwareStatus || null,
+      condition_notes: input.conditionNotes || null,
+      pta_tax: input.ptaTax || 0,
     })
     .select('*')
     .single();
@@ -272,6 +306,64 @@ export async function fetchParts(): Promise<Part[]> {
   const { data, error } = await supabase.from('parts').select('*').order('name');
   if (error) throw error;
   return (data ?? []).map(mapPart);
+}
+
+export async function addPart(input: { name: string; sku?: string; unitCost: number; quantityInStock: number }): Promise<void> {
+  const { error } = await supabase.from('parts').insert({
+    name: input.name,
+    sku: input.sku || null,
+    unit_cost: input.unitCost,
+    quantity_in_stock: input.quantityInStock,
+  });
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// device history (audit trail of status / cost changes)
+// ---------------------------------------------------------------------------
+export async function fetchDeviceHistory(deviceUuid: string): Promise<DeviceHistoryEntry[]> {
+  const { data, error } = await supabase
+    .from('device_history')
+    .select('*')
+    .eq('device_id', deviceUuid)
+    .order('changed_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({ id: row.id, fieldName: row.field_name, oldValue: row.old_value, newValue: row.new_value, changedAt: row.changed_at }));
+}
+
+// ---------------------------------------------------------------------------
+// diagnostics checklist (persisted per device)
+// ---------------------------------------------------------------------------
+export async function fetchDiagnostics(deviceUuid: string): Promise<DiagnosticResult[]> {
+  const { data, error } = await supabase.from('device_diagnostics').select('*').eq('device_id', deviceUuid);
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({ item: row.item, passed: row.passed, checkedAt: row.checked_at }));
+}
+
+export async function saveDiagnosticResult(deviceUuid: string, item: string, passed: boolean): Promise<void> {
+  const { error } = await supabase
+    .from('device_diagnostics')
+    .upsert({ device_id: deviceUuid, item, passed, checked_at: new Date().toISOString() }, { onConflict: 'device_id,item' });
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// active warranties (owner-only, via the sales table's RLS)
+// ---------------------------------------------------------------------------
+export async function fetchActiveWarranties(): Promise<ActiveWarranty[]> {
+  const { data, error } = await supabase
+    .from('sales')
+    .select('sale_date, warranty_days, warranty_expires_at, devices!inner(id, device_code, model)')
+    .gte('warranty_expires_at', new Date().toISOString().slice(0, 10))
+    .order('warranty_expires_at', { ascending: true });
+  if (error) throw error;
+  const today = new Date();
+  return (data ?? []).map((row: any) => {
+    const d = Array.isArray(row.devices) ? row.devices[0] : row.devices;
+    const expiresAt = new Date(row.warranty_expires_at);
+    const daysRemaining = Math.max(0, Math.ceil((expiresAt.getTime() - today.getTime()) / 86400000));
+    return { deviceId: d.id, deviceCode: d.device_code, model: d.model, saleDate: row.sale_date, warrantyDays: row.warranty_days, expiresAt: row.warranty_expires_at, daysRemaining };
+  });
 }
 
 // ---------------------------------------------------------------------------

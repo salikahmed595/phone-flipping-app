@@ -8,6 +8,31 @@ export type Profile = {
   id: string;
   fullName: string | null;
   role: Role;
+  avatarUrl: string | null;
+};
+
+export type DeviceHistoryEntry = {
+  id: string;
+  fieldName: string;
+  oldValue: string | null;
+  newValue: string | null;
+  changedAt: string;
+};
+
+export type DiagnosticResult = {
+  item: string;
+  passed: boolean;
+  checkedAt: string;
+};
+
+export type ActiveWarranty = {
+  deviceId: string;
+  deviceCode: string;
+  model: string;
+  saleDate: string;
+  warrantyDays: number;
+  expiresAt: string;
+  daysRemaining: number;
 };
 
 export type Device = {
