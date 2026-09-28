@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { DashboardStats, Device, Expense, Part, Profile } from './types';
+import type { DashboardStats, Device, Expense, Part, Profile, SaleRecord } from './types';
 
 // ---------------------------------------------------------------------------
 // auth
@@ -172,6 +172,23 @@ export async function addExpense(input: { title: string; amount: number; categor
     category: input.category || 'General',
   });
   if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// sales history (owner-only, via the sales table's RLS) — for reports/trends
+// ---------------------------------------------------------------------------
+export async function fetchSalesHistory(): Promise<SaleRecord[]> {
+  const { data, error } = await supabase
+    .from('sales')
+    .select('sale_date, sale_price, devices!inner(purchase_price, repair_cost, pta_tax)')
+    .order('sale_date', { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((row: any) => {
+    const d = Array.isArray(row.devices) ? row.devices[0] : row.devices;
+    const salePrice = Number(row.sale_price);
+    const cost = Number(d.purchase_price) + Number(d.repair_cost) + Number(d.pta_tax);
+    return { saleDate: row.sale_date, salePrice, profit: salePrice - cost };
+  });
 }
 
 // ---------------------------------------------------------------------------

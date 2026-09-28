@@ -53,3 +53,19 @@ export type DashboardStats = {
   net_profit?: number;
   net_profit_last_month?: number;
 };
+
+export type SaleRecord = {
+  saleDate: string;
+  salePrice: number;
+  profit: number;
+};
+
+export type QueuedActionType = 'addDevice' | 'logRepair' | 'addExpense' | 'recordSale' | 'markReadyForSale';
+
+export type QueuedAction = {
+  id: string;
+  type: QueuedActionType;
+  payload: any;
+  createdAt: number;
+  label: string;
+};
