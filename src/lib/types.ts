@@ -49,6 +49,25 @@ export type Device = {
   tax: number; // pta_tax
   sale?: number; // sale_price
   date: string; // acquisition_date
+  remarks?: string;
+  thumbnailUrl?: string;
+};
+
+export type PhotoAngle = 'front' | 'back' | 'side' | 'other';
+
+export type DevicePhoto = {
+  id: string;
+  angle: PhotoAngle;
+  url: string;
+  createdAt: string;
+};
+
+export type ChartPeriod = 'weekly' | '15day' | 'monthly';
+
+export type ChartBucket = {
+  key: string;
+  label: string;
+  profit: number;
 };
 
 export type Expense = {

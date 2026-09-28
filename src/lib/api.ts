@@ -81,6 +81,8 @@ function mapDevice(row: any): Device {
     tax: Number(row.pta_tax),
     sale: row.sale_price != null ? Number(row.sale_price) : undefined,
     date: row.acquisition_date,
+    remarks: row.remarks ?? undefined,
+    thumbnailUrl: row.thumbnail_url ?? undefined,
   };
 }
 
@@ -126,6 +128,7 @@ export async function addDevice(input: {
   softwareStatus?: string;
   conditionNotes?: string;
   ptaTax?: number;
+  remarks?: string;
 }): Promise<Device> {
   const { data, error } = await supabase
     .from('devices')
@@ -139,11 +142,38 @@ export async function addDevice(input: {
       software_status: input.softwareStatus || null,
       condition_notes: input.conditionNotes || null,
       pta_tax: input.ptaTax || 0,
+      remarks: input.remarks || null,
     })
     .select('*')
     .single();
   if (error) throw error;
   return mapDevice(data);
+}
+
+// ---------------------------------------------------------------------------
+// device photos (front/back/side/other) — public bucket, one row per photo
+// ---------------------------------------------------------------------------
+export async function uploadDevicePhoto(deviceUuid: string, angle: 'front' | 'back' | 'side' | 'other', fileUri: string, contentType: string): Promise<string> {
+  const ext = contentType.includes('png') ? 'png' : 'jpg';
+  const path = `${deviceUuid}/${angle}-${Date.now()}.${ext}`;
+  const response = await fetch(fileUri);
+  const arrayBuffer = await response.arrayBuffer();
+  const { error: uploadError } = await supabase.storage.from('device-photos').upload(path, arrayBuffer, { contentType, upsert: true });
+  if (uploadError) throw uploadError;
+  const { data } = supabase.storage.from('device-photos').getPublicUrl(path);
+  const publicUrl = data.publicUrl;
+  const { error: insertError } = await supabase.from('device_photos').insert({ device_id: deviceUuid, angle, url: publicUrl });
+  if (insertError) throw insertError;
+  if (angle === 'front') {
+    await supabase.from('devices').update({ thumbnail_url: publicUrl }).eq('id', deviceUuid);
+  }
+  return publicUrl;
+}
+
+export async function fetchDevicePhotos(deviceUuid: string): Promise<{ id: string; angle: string; url: string; createdAt: string }[]> {
+  const { data, error } = await supabase.from('device_photos').select('*').eq('device_id', deviceUuid).order('created_at', { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({ id: row.id, angle: row.angle, url: row.url, createdAt: row.created_at }));
 }
 
 export async function markReadyForSale(deviceUuid: string): Promise<void> {
