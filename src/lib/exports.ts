@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system/legacy';
@@ -112,4 +112,28 @@ export async function exportInventoryCsv(devices: ReceiptDevice[]): Promise<void
   if (await Sharing.isAvailableAsync()) {
     await Sharing.shareAsync(uri, { mimeType: 'text/csv', dialogTitle: 'Export inventory' });
   }
+}
+
+// ---------------------------------------------------------------------------
+// marketplace listing + one-tap WhatsApp share
+// ---------------------------------------------------------------------------
+export function buildMarketplaceListing(device: ReceiptDevice, batteryHealth?: string): string {
+  const ptaLine = device.pta === 'PTA Approved' ? '✅ PTA Approved' : device.pta === 'Non-PTA' ? '⚠️ Non-PTA' : '🔒 JV / Carrier Locked';
+  return [
+    `📱 *${device.model}* — ${device.storage}`,
+    '',
+    ptaLine,
+    batteryHealth ? `🔋 Battery health: ${batteryHealth}` : undefined,
+    `📦 Condition: Ready for sale`,
+    `💰 Price: ${money(device.sale ?? device.cost)}`,
+    '',
+    `Message me for photos or to arrange a viewing!`,
+  ].filter((l): l is string => l !== undefined).join('\n');
+}
+
+export async function shareListingViaWhatsApp(text: string): Promise<void> {
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  const can = Platform.OS === 'web' ? true : await Linking.canOpenURL(url);
+  if (!can) throw new Error('WhatsApp does not appear to be available on this device.');
+  await Linking.openURL(url);
 }

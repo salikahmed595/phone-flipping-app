@@ -62,6 +62,24 @@ export type SaleRecord = {
 
 export type QueuedActionType = 'addDevice' | 'logRepair' | 'addExpense' | 'recordSale' | 'markReadyForSale';
 
+export type VerificationStatus = 'verified' | 'inconclusive' | 'unavailable' | 'error';
+
+export type VerificationCheck = {
+  id: string;
+  imeiSlot: 1 | 2;
+  provider: string;
+  status: VerificationStatus;
+  result: any;
+  checkedAt: string;
+};
+
+export type TradeInResult = {
+  saleId: string;
+  incomingDeviceId: string;
+  incomingDeviceCode: string;
+  cashDifference: number;
+};
+
 export type QueuedAction = {
   id: string;
   type: QueuedActionType;

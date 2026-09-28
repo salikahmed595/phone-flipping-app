@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { DashboardStats, Device, Expense, Part, Profile, SaleRecord } from './types';
+import type { DashboardStats, Device, Expense, Part, Profile, SaleRecord, TradeInResult, VerificationCheck } from './types';
 
 // ---------------------------------------------------------------------------
 // auth
@@ -172,6 +172,80 @@ export async function addExpense(input: { title: string; amount: number; categor
     category: input.category || 'General',
   });
   if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// trade-ins (owner-only; atomic via the record_trade_in() RPC)
+// ---------------------------------------------------------------------------
+export async function recordTradeIn(input: {
+  outgoingDeviceUuid: string;
+  outgoingSalePrice: number;
+  incomingModel: string;
+  incomingStorage?: string;
+  incomingImei: string;
+  incomingValue: number;
+  warrantyDays?: 3 | 7;
+  buyerName?: string;
+  buyerContact?: string;
+}): Promise<TradeInResult> {
+  const { data, error } = await supabase.rpc('record_trade_in', {
+    p_outgoing_device_id: input.outgoingDeviceUuid,
+    p_outgoing_sale_price: input.outgoingSalePrice,
+    p_incoming_model: input.incomingModel,
+    p_incoming_storage: input.incomingStorage ?? null,
+    p_incoming_imei: input.incomingImei,
+    p_incoming_value: input.incomingValue,
+    p_warranty_days: input.warrantyDays ?? 7,
+    p_buyer_name: input.buyerName ?? null,
+    p_buyer_contact: input.buyerContact ?? null,
+  });
+  if (error) throw error;
+  const row = Array.isArray(data) ? data[0] : data;
+  return {
+    saleId: row.sale_id,
+    incomingDeviceId: row.incoming_device_id,
+    incomingDeviceCode: row.incoming_device_code,
+    cashDifference: Number(row.cash_difference),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// IMEI/PTA verification — an honest audit trail. No verification provider
+// (PTA DVS, Apple GSX, IMEI.info/Sickw, etc.) is connected yet, so every
+// check logs 'unavailable' rather than claiming a result that was never
+// actually returned by a real provider, per the PRD's requirement.
+// ---------------------------------------------------------------------------
+export async function fetchVerificationChecks(deviceUuid: string): Promise<VerificationCheck[]> {
+  const { data, error } = await supabase
+    .from('verification_checks')
+    .select('*')
+    .eq('device_id', deviceUuid)
+    .order('checked_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({
+    id: row.id,
+    imeiSlot: row.imei_slot,
+    provider: row.provider,
+    status: row.status,
+    result: row.result,
+    checkedAt: row.checked_at,
+  }));
+}
+
+export async function requestVerification(deviceUuid: string, imeiSlot: 1 | 2 = 1): Promise<VerificationCheck> {
+  const { data, error } = await supabase
+    .from('verification_checks')
+    .insert({
+      device_id: deviceUuid,
+      imei_slot: imeiSlot,
+      provider: 'none',
+      status: 'unavailable',
+      result: { message: 'No verification provider is connected for this workspace yet.' },
+    })
+    .select('*')
+    .single();
+  if (error) throw error;
+  return { id: data.id, imeiSlot: data.imei_slot, provider: data.provider, status: data.status, result: data.result, checkedAt: data.checked_at };
 }
 
 // ---------------------------------------------------------------------------
